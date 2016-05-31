@@ -1,10 +1,12 @@
 package com.jam.domain;
 
+import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 
+@Entity
 public class JdocRelation {
-	private int doc_id;
-	private int keyword_id;
+	private int docId;
+	private String keywordKo;
 	
 	@ManyToOne
 	private Jkeyword jkeyword;
@@ -13,19 +15,19 @@ public class JdocRelation {
 	private Jdoc jdoc;
 
 	public int getDoc_id() {
-		return doc_id;
+		return docId;
 	}
 
 	public void setDoc_id(int doc_id) {
-		this.doc_id = doc_id;
+		this.docId = doc_id;
 	}
 
-	public int getKeyword_id() {
-		return keyword_id;
+	public String getKeyword_id() {
+		return keywordKo;
 	}
 
-	public void setKeyword_id(int keyword_id) {
-		this.keyword_id = keyword_id;
+	public void setKeyword_id(String keywordKo) {
+		this.keywordKo = keywordKo;
 	}
 
 	public Jkeyword getJkeyword() {

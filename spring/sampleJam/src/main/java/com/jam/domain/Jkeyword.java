@@ -9,24 +9,15 @@ import javax.persistence.OneToMany;
 @Entity
 public class Jkeyword {
 	
-	@Id
-	private int jkey_id;
-	
+	@Id	
 	private String ko;
+	
 	private String en;
-	private String type;
+	private String jtype;
 	private double score;
 	
 	@OneToMany
 	private List<JdocRelation> docs;
-
-	public int getJkey_id() {
-		return jkey_id;
-	}
-
-	public void setJkey_id(int jkey_id) {
-		this.jkey_id = jkey_id;
-	}
 
 	public String getKo() {
 		return ko;
@@ -45,11 +36,11 @@ public class Jkeyword {
 	}
 
 	public String getType() {
-		return type;
+		return jtype;
 	}
 
 	public void setType(String type) {
-		this.type = type;
+		this.jtype = type;
 	}
 
 	public double getScore() {

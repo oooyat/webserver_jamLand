@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -11,39 +12,36 @@ import javax.persistence.OneToMany;
 public class Jdoc {
 	
 	@Id
-	private int jdoc_id;
+	@GeneratedValue
+	private int docId;
 	
 	private String title;
 	private String subtitle;
-	private String ytb_id;
+	private String ytb;
 	private String context1;
 	private String context2;
 	private int rcmd;
 	private int	rprt;
-	private String user_id;
-	private Date mdfy_date;
-	private int dir_id;
+	private String userId;
+	private Date mdfyDate;
 	
 	@OneToMany
 	private List<JsaveDoc> myJusers;
 	
 	@OneToMany
 	private List<JdocRelation> myRelations;
-	
-	@ManyToOne
-	private Jdir jdir;
-	
+		
 	private Jdoc()
 	{
 		
 	}
 	
 	public int getJdoc_id() {
-		return jdoc_id;
+		return docId;
 	}
 
 	public void setJdoc_id(int jdoc_id) {
-		this.jdoc_id = jdoc_id;
+		this.docId = jdoc_id;
 	}
 
 	public String getTitle() {
@@ -63,11 +61,11 @@ public class Jdoc {
 	}
 
 	public String getYtb_id() {
-		return ytb_id;
+		return ytb;
 	}
 
 	public void setYtb_id(String ytb_id) {
-		this.ytb_id = ytb_id;
+		this.ytb = ytb_id;
 	}
 
 	public String getContext1() {
@@ -103,27 +101,19 @@ public class Jdoc {
 	}
 
 	public String getUser_id() {
-		return user_id;
+		return userId;
 	}
 
 	public void setUser_id(String user_id) {
-		this.user_id = user_id;
+		this.userId = user_id;
 	}
 
 	public Date getMdfy_date() {
-		return mdfy_date;
+		return mdfyDate;
 	}
 
 	public void setMdfy_date(Date mdfy_date) {
-		this.mdfy_date = mdfy_date;
-	}
-
-	public int getDir_id() {
-		return dir_id;
-	}
-
-	public void setDir_id(int dir_id) {
-		this.dir_id = dir_id;
+		this.mdfyDate = mdfy_date;
 	}
 
 	public List<JsaveDoc> getMyJusers() {
@@ -140,14 +130,6 @@ public class Jdoc {
 
 	public void setMyRelations(List<JdocRelation> myRelations) {
 		this.myRelations = myRelations;
-	}
-
-	public Jdir getJdir() {
-		return jdir;
-	}
-
-	public void setJdir(Jdir jdir) {
-		this.jdir = jdir;
 	}
 
 	@Override
