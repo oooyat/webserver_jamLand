@@ -17,7 +17,6 @@ import org.springframework.boot.orm.jpa.EntityScan;
 public class Juser {
 	
 	@Id
-	//@Column(name = "id")
 	private String id;
 	
 	//@Column(name = "pw")
@@ -29,12 +28,9 @@ public class Juser {
 	//@Column(name = "mail")
 	private String mail;
 	
-	/*
-	 * @OneToMany(mappedBy = "Juser")
-	private List<JsaveDoc> myJdocs;
-	 */
 	
-	
+	@OneToMany(mappedBy = "juser")
+	private List<Jsavedoc> jsavedocs;
 	
 	private Juser()
 	{

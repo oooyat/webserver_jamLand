@@ -4,11 +4,11 @@ import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
 
-import com.jam.domain.JsaveDoc;
+import com.jam.domain.Jsavedoc;
 
-public interface JsaveDocRepository extends CrudRepository<JsaveDoc, String>{
+public interface JsavedocRepository extends CrudRepository<Jsavedoc, String>{
 	
-	List<JsaveDoc> findAll();
-	List<JsaveDoc> findByUserId(String userId);
+	List<Jsavedoc> findAll();
+	List<Jsavedoc> findByUid(String uid);
 
 }

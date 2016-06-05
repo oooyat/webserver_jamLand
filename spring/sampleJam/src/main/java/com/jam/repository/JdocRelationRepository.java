@@ -4,12 +4,14 @@ import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
 
-import com.jam.domain.JdocRelation;
+import com.jam.domain.Jdocrelation;
 
-public interface JdocRelationRepository extends CrudRepository<JdocRelation, String>{
+public interface JdocrelationRepository extends CrudRepository<Jdocrelation, String>{
 	
-	List<JdocRelation> findByDocId(int docId);
-	List<JdocRelation> findByKeywordKo(String keywordKo);
+	List<Jdocrelation> findByDid(int did);
+	List<Jdocrelation> findByKeyword(String keyword);
 	//JdocRelation findByDocIdAndKeywordKo(int docId, String keywordKo);
+	
+	//void insert(Jdocrelation jdocrelation);
 
 }

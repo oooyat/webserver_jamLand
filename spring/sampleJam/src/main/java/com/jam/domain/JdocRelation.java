@@ -6,42 +6,66 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class JdocRelation {
+public class Jdocrelation {
 	
 	@Id
 	@GeneratedValue
 	private int id;
 	
-	private int docId;
-	private String keywordKo;
+	private int did;
+	private String keyword;
 	
 	@ManyToOne
 	private Jdoc jdoc;
-
+//
 	@ManyToOne
 	private Jkeyword jkeyword;
 	
 
-	private JdocRelation()
+	private Jdocrelation()
 	{
 		
 	}
 	
-	public int getDocId() {
-		return docId;
+	
+
+	public int getId() {
+		return id;
 	}
 
-	public void setDocId(int docId) {
-		this.docId = docId;
+
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
-	public String getKeywordKo() {
-		return keywordKo;
+
+
+	public int getDid() {
+		return did;
 	}
 
-	public void setKeywordKo(String keywordKo) {
-		this.keywordKo = keywordKo;
+
+
+	public void setDid(int did) {
+		this.did = did;
 	}
+
+
+
+	public String getKeyword() {
+		return keyword;
+	}
+
+
+
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
+
+
+
+	
 
 	
 	

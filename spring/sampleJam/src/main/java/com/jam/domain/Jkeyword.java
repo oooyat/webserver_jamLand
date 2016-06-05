@@ -16,13 +16,10 @@ public class Jkeyword {
 	private String jtype;
 	private double score;
 	
-	@OneToMany
-	private List<JdocRelation> docs;
+	@OneToMany( mappedBy = "jkeyword")
+	private List<Jdocrelation> jdocrelations;
 	 
-	
-	
-
-	private Jkeyword()
+	public Jkeyword()
 	{
 		
 	}

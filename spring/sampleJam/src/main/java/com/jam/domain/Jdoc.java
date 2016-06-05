@@ -14,7 +14,7 @@ public class Jdoc {
 	
 	@Id
 	@GeneratedValue
-	private int docId;
+	private int did;
 	
 	private String title;
 	private String subtitle;
@@ -23,31 +23,34 @@ public class Jdoc {
 	private String context2;
 	private int rcmd;
 	private int	rprt;
-	private String userId;
-	private Date mdfyDate;
-	
-	/*
-	 * @OneToMany( mappedBy = "Jdoc")
-	private List<JsaveDoc> jsavedocs;
+	private String uid;
+	private Date mdfydate;
 	
 	
-	 */
-	
-	@OneToMany
-	private List<JdocRelation> myRelations;
+	@OneToMany( mappedBy = "jdoc")
+	private List<Jsavedoc> jsavedocs;
+
+	@OneToMany( mappedBy = "jdoc")
+	private List<Jdocrelation> jdocrelations;
 		
-	private Jdoc()
+	public Jdoc()
 	{
 		
 	}
 	
-	public int getJdoc_id() {
-		return docId;
+	
+
+	public int getDid() {
+		return did;
 	}
 
-	public void setDocId(int docId) {
-		this.docId = docId;
+
+
+	public void setDid(int did) {
+		this.did = did;
 	}
+
+
 
 	public String getTitle() {
 		return title;
@@ -65,12 +68,12 @@ public class Jdoc {
 		this.subtitle = subtitle;
 	}
 
-	public String getYtb_id() {
+	public String getYtbId() {
 		return ytb;
 	}
 
-	public void setYtb_id(String ytb_id) {
-		this.ytb = ytb_id;
+	public void setYtbId(String ytbId) {
+		this.ytb = ytbId;
 	}
 
 	public String getContext1() {
@@ -105,26 +108,37 @@ public class Jdoc {
 		this.rprt = rprt;
 	}
 
-	public String getUserId() {
-		return userId;
+	
+
+	public String getUid() {
+		return uid;
 	}
 
-	public void setUserId(String userId) {
-		this.userId = userId;
+
+
+	public void setUid(String uid) {
+		this.uid = uid;
 	}
 
-	public Date getMdfyDate() {
-		return mdfyDate;
-	}
 
-	public void setMdfyDate(Date mdfyDate) {
-		this.mdfyDate = mdfyDate;
-	}
 
 	
+
+	
+
+	public Date getMdfydate() {
+		return mdfydate;
+	}
+
+
+
+	public void setMdfydate(Date mdfydate) {
+		this.mdfydate = mdfydate;
+	}
 
 	@Override
 	public String toString() {
 		return title;
 	}
+	
 }

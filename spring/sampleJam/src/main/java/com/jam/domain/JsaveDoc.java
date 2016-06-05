@@ -9,45 +9,53 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "JsaveDoc")
-public class JsaveDoc {
+@Table(name = "Jsavedoc")
+public class Jsavedoc {
 	
 	@Id
 	@GeneratedValue
 	private int id;
 	
-	private String userId;
-	private int docId;
+	private String uid;
+	private int did;
 	
-	
-	/*
-	 * @ManyToOne
-	@JoinColumn(name = "id")
-	private Juser juser;
 	
 	@ManyToOne
-	@JoinColumn(name = "docId")
+	private Juser juser;
+//	
+	@ManyToOne
 	private Jdoc jdoc;
-	 */
-	
-	
-	private JsaveDoc()
+		
+	private Jsavedoc()
 	{
 		
 	}
 	
-	public String getUser_id() {
-		return userId;
+	public int getId() {
+		return id;
 	}
-	public void setUser_id(String user_id) {
-		this.userId = user_id;
+
+	public void setId(int id) {
+		this.id = id;
 	}
-	public int getDoc_id() {
-		return docId;
+
+	public String getUid() {
+		return uid;
 	}
-	public void setDoc_id(int doc_id) {
-		this.docId = doc_id;
+
+	public void setUid(String uid) {
+		this.uid = uid;
 	}
+
+	public int getDid() {
+		return did;
+	}
+
+	public void setDid(int did) {
+		this.did = did;
+	}
+
+	
 
 	
 }

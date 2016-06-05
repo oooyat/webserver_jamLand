@@ -7,13 +7,16 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 import com.jam.domain.Jdoc;
+import com.jam.domain.Jdocrelation;
 
 
-public interface JdocRepository extends CrudRepository<Jdoc, String>{
+public interface Jdocrepository extends CrudRepository<Jdoc, String>{
 	
-	List<Jdoc> findAll();	
+	List<Jdoc> findAll();		
+	Jdoc findByDid(int did);
 	
-	//Jdoc findOne(int docId);
+	//void insert(Jdoc jdoc);
+	//void update(Jdoc jdoc);
 	
 	//List<Jdoc> findByUserId(String userId);
 	//Like문 쓰는법..? select * from jdoc where title LIKE '%abcd%'
