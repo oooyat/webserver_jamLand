@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>jamland_menu</title>
+<style type="text/css">
+.when_title {
+}
+</style>
+<script>
+function whatTime()
+{
+	cdate = new Date();
+	cyear = cdate.getYear() + 1900;
+	cmonth = cdate.getMonth() +1;
+	ctoday = cdate.getDate();
+	
+	document.write(cyear + ". " + cmonth + ". " + ctoday + " ");
+}
+</script>
+</head>
+
+<body>
+<hr>
+<font size="5"> <script>whatTime()</script> </font>
+<p >환영합니다. </p>
+<a HREF="jam_main.html" TARGET="intro"><img src="JAMLAND_SUBTITLE2.png" alt="" width="262.40" height="182.40" /></a>
+    <br><br>
+    <a href="jam_list1.html" TARGET="intro">음악대장</a>
+    <br>
+<br><br>
+<a href="jam_plus.html" TARGET="intro">+ JAM 쓰기</a>
+<form>
+	
+</form>
+ 
+</body>
+
+</html>

@@ -4,43 +4,103 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.jam.domain.Jdoc;
+import com.jam.domain.JdocRelation;
 import com.jam.domain.Jkeyword;
-import com.jam.repository.*;
+import com.jam.domain.JkeywordList;
+import com.jam.domain.JsaveDoc;
+import com.jam.domain.Juser;
+import com.jam.repository.JkeywordRepository;
+import com.jam.repository.JsaveDocRepository;
+import com.jam.repository.JuserRepository;
+import com.jam.repository.JdocRelationRepository;
+import com.jam.repository.JdocRepository;
+
+/*
+ * 
+ 메인 – 키워드 목록
+메인/키워드 – 키워드와 연관되어 있는 문서들 
+메인/키워드/문서id - 문서 내용
+
+메일/juser -사용자 목록
+메인/juser/사용자id – 사용자와 연관되어 있는 문서들
+메인/juser/사용자id/문서id– 문서 내용
+ * 
+ * 
+ */
+
 
 @RestController
 @RequestMapping("/")
 public class Controller {
+		
+	@Autowired
+	JkeywordRepository jkeywordRepository;
 	
 	@Autowired
-	JdocRepository jdocrepository;
+	JdocRepository jdocRepository;
 	
 	@Autowired
-	JdocRelationRepository jdocrelationrepository;
+	JdocRelationRepository jdocRelationRepository;
 	
 	@Autowired
-	JkeywordRepository jkeywordrepository;
+	JsaveDocRepository jsaveDocRepository;
 	
 	@Autowired
-	JsaveDocRepository jsavedocrepository;
-	
-	@Autowired
-	JuserRepository juserrepository;
+	JuserRepository juserRepository;
 	
 	@RequestMapping("/")
-	public ArrayList<Jkeyword> list() {
+	public JkeywordList keywordList() {
 
-		List<Jkeyword> keywords = jkeywordrepository.findAll();
-		ArrayList<Jkeyword> keywordList = new ArrayList<Jkeyword>();
+		List<Jkeyword> jkeywords = jkeywordRepository.findAll();
+		JkeywordList jkeywordList = new JkeywordList();
 		
-		for (Jkeyword keyword : keywords){
-			//keywordList.addRestaurantList(keyword.getKo());
-			keywordList.add(keyword);
+		for (Jkeyword jkeyword : jkeywords){
+			jkeywordList.addJkeywordList(jkeyword.getKo());
 		}
 		
-		return keywordList;
+		return jkeywordList;
 	}
+	
+	@RequestMapping("/{ko}")
+	public List<String> keywordToDocList(@PathVariable String ko)
+	{
+		List<JdocRelation> jrelations = jdocRelationRepository.findByKeywordKo(ko);
+		List<String> docList = new ArrayList<String>();
+		
+		for (JdocRelation rel : jrelations){
+			docList.add(Integer.toString(rel.getDocId()));
+		}
+		
+		return docList;
+		
+	}
+	
+	@RequestMapping("/juser")//forTest
+	public List<String> savedList() {
+
+		List<Juser> jusers = juserRepository.findAll();
+		List<String> savedDocList = new ArrayList<String>();
+		
+		for (Juser juser : jusers){
+			savedDocList.add(juser.getId());
+		}
+		
+		return savedDocList;
+	}
+	
+	@RequestMapping("/greeting")
+	public String greeting(@RequestParam(value="name", required=false, defaultValue="World")String name, Model model)
+	{
+		
+		return "jam_menu";
+	}
+	
 
 }
