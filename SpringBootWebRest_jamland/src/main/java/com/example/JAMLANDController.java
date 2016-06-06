@@ -4,8 +4,11 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpSession;
@@ -31,6 +34,8 @@ import com.example.repository.JsavedocRepository;
 import com.example.repository.JuserRepository;
 import com.example.domain.Jsavedoc;
 import com.example.domain.Juser;
+import com.example.api.naver.NaverConnection;
+import com.example.api.watson.WatsonConnection;
 import com.example.domain.Jdoc;
 import com.example.domain.Jdocrelation;
 
@@ -53,6 +58,7 @@ public class JAMLANDController {
 	@Autowired
 	JuserRepository juserRepository;
 	
+	private static String NOUSER = "unknown";
 	
 	 @RequestMapping("/")
 	    public String combinMain(Model model) {
@@ -171,11 +177,15 @@ public class JAMLANDController {
 		 	 
 		 model.addAttribute("keyword", keyword);
 		 model.addAttribute("num", Integer.toString(num));
-		 model.addAttribute("dids", dids.substring(1));
-		 model.addAttribute("content_title", content_title.substring(1));
-		 model.addAttribute("content_subtitle", content_subtitle.substring(1));
-		 model.addAttribute("content_keywords", content_keywords.substring(1));
-		 model.addAttribute("content_ytb", content_ytb.substring(1));
+		 if(num != 0)
+		 {
+			 model.addAttribute("dids", dids.substring(1));
+			 model.addAttribute("content_title", content_title.substring(1));
+			 model.addAttribute("content_subtitle", content_subtitle.substring(1));
+			 model.addAttribute("content_keywords", content_keywords.substring(1));
+			 model.addAttribute("content_ytb", content_ytb.substring(1));			 
+		 }
+		 
 		  
 	        return "jam_list1";
 	    } 
@@ -236,6 +246,21 @@ public class JAMLANDController {
 		
 		 return "jam_list1";
 	 }
+	
+	@RequestMapping("/save.do")
+	public String saveJam(@RequestParam(value="did", required=true) String did, Model model, HttpSession session) 
+	{
+		if(session.isNew())
+			return "";
+		
+		Jsavedoc jsavedoc = new Jsavedoc();
+		jsavedoc.setDid(Integer.parseInt(did));
+		jsavedoc.setUid((String)session.getAttribute("id"));
+		
+		jsavedocRepository.save(jsavedoc);
+		
+		return "jam_main";
+	}
 	 
     @RequestMapping("/jam_context")
     public String jamContext(@RequestParam(value="did", required=true) String did, Model model) {
@@ -266,7 +291,7 @@ public class JAMLANDController {
     	if(did.equals("null"))
     		return "jam_plus";
     	
-    	String id = "unKnown";
+    	String id = NOUSER;
     	if(!session.isNew())
     		id = (String)session.getAttribute("id");
     	
@@ -284,20 +309,77 @@ public class JAMLANDController {
         model.addAttribute("ytb", jdoc.getYtbId());
         model.addAttribute("context1", jdoc.getContext1());
         model.addAttribute("context2", jdoc.getContext2());
-        model.addAttribute("keywords", keywords.substring(1));
+        if(keywords.length() != 1)
+        	model.addAttribute("keywords", keywords.substring(1));
     	    	
     		return "jam_plus";
         }
     
     @RequestMapping("/plus.do")
-    public String doPlus(@RequestParam("input_title")String title,
+    public String doPlus(@RequestParam(value="input_did", required=false, defaultValue="0") String did,
+    				@RequestParam("input_title")String title,
 								@RequestParam("input_subtitle")String subtitle, 
 									@RequestParam("input_ytb")String ytb, 
 										@RequestParam("input_context1")String context1,
 										@RequestParam("input_context2")String context2,
 											@RequestParam("input_keywords")String keywords, Model model, HttpSession session)
-    {
+    {   	
+    	Jdoc jdoc = new Jdoc();
+    	if(!did.equals(0))
+    		jdoc.setDid(Integer.parseInt(did));   	
+    	jdoc.setTitle(title);
+    	jdoc.setSubtitle(subtitle);
+    	jdoc.setYtbId(ytb);
+    	jdoc.setContext1(context1);
+    	jdoc.setContext2(context2);
     	
+    	if(session.isNew())
+    		jdoc.setUid(NOUSER);
+    	else
+    		jdoc.setUid((String)session.getAttribute("id"));    	
+    	jdoc.setRcmd(0);
+    	jdoc.setRprt(0);
+    	
+    	jdoc.setMdfydate(new Date(Calendar.getInstance().getTimeInMillis()));
+    	Jdoc jdoc2 =jdocRepository.save(jdoc);
+    	
+    	int newDid = jdoc2.getDid();
+    	System.out.println(newDid + " : " + jdoc2.getContext2());
+    	/******************************************************/
+    	String[] keyword = keywords.split("%");
+    	NaverConnection naver = new NaverConnection();
+    	WatsonConnection watson;
+    	
+    	for(int i=0; i< keyword.length ; i++)
+    	{
+    		Jkeyword jkeyword = new Jkeyword();
+    		String ko = keyword[i];    		
+    		jkeyword.setKo(ko);
+    		
+    		String en = naver.koToEn(ko);
+    		System.out.println(en);
+    		jkeyword.setEn(en);
+    		
+    		watson = new WatsonConnection(en);
+    		
+    		jkeyword.setType(watson.mostEmotion());
+    		jkeyword.setScore(watson.mostEmotionScore());
+    		
+    		Jkeyword jkeyword2 = jkeywordRepository.save(jkeyword);
+    		
+    		/***********************************************/
+    		
+    		Jdocrelation jdocrelation = jdocrelationRepository.findByDidAndKeyword(newDid, jkeyword2.getKo());
+    		if(jdocrelation == null)
+    		{
+    			jdocrelation = new Jdocrelation();
+    			jdocrelation.setDid(newDid);
+        		jdocrelation.setKeyword(jkeyword2.getKo());
+        		
+        		jdocrelationRepository.save(jdocrelation);   
+    		}   		 		
+    	} 
+       	
     	return "jam_main";
     }
     

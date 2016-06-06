@@ -20,8 +20,22 @@
 	
 	<h1 th:text="'keyword :' + ${keyword}"></h1>
 	
-	<input TYPE="text" STYLE="TEXT-ALIGN:center" NAME="input1" size="50" height="50"  ></input>
-	<a> <img src="/image?name=search_icon.png" alt="search" height = "35" ></img></a>    
+	<!-- 
+	<input TYPE="text" STYLE="TEXT-ALIGN:center" NAME="input1" size="50" height="50"></input>
+	<a><img src="/image?name=search_icon.png" alt="search" height = "35" ></img></a>
+	 -->
+		
+	<form name="f">
+	<input TYPE="text" STYLE="TEXT-ALIGN:center" NAME="key" size="50" height="50" value="keyword"></input>
+	
+	
+	</form>
+	<script type="text/javascript">
+	var key = document.f.key.value;
+	document.write('<a href = "?keyword='+ key + '"><img src="/image?name=search_icon.png" alt="search" height="35px"></img></a>');
+	</script>
+	
+	
 	<br></br><br></br>
 	<!-- 
 	<table width="200">

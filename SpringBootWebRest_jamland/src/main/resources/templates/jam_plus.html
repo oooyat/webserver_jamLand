@@ -11,6 +11,7 @@
 
 <body class="jam_plus_page">
 	<p th:text="${keywords}" hidden="false" id="keywords"></p>
+	<p th:text="${did}" hidden="false" id="did"></p>
 	<p th:text="${title}" hidden="false" id="title"></p>
 	<p th:text="${subtitle}" hidden="false" id="subtitle"></p>
 	<p th:text="${context1}" hidden="false" id="context1"></p>
@@ -21,6 +22,8 @@
     <img src="/image?name=JAMLAND_TITLE_SMALL.png"></img>
     
     <form name="plus_form" action="/plus.do" method="post">
+    	<input th:value="${did}" NAME="input_did" hidden="false"></input>
+    
     	<p>Title</p>    
 	    <input id="title_input" TYPE="text" STYLE="TEXT-ALIGN:LEFT" NAME="input_title" size="50" height="50" th:value="${title}"></input>    
 	

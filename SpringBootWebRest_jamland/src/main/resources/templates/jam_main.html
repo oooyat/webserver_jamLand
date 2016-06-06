@@ -13,16 +13,23 @@
 
 <p th:text="${num}" hidden="false" id="num"></p>
 
-<form ALIGN="CENTER">
+<div ALIGN="CENTER">
 <a href="jam_login.html" >로그인 </a> 
-    <a href="jam_join.html">회원가입</a>
+<a href="jam_join.html">회원가입</a>
 <br></br>
 <br></br><br></br><br></br><br></br><br></br><br></br>
 <img src="/image?name=JAMLAND_TITLE.png" alt="title" ></img>
 <br></br>
 
-<input TYPE="text" STYLE="TEXT-ALIGN:center" NAME="input1" size="100" height="50"  ></input>
-<a><img src="/image?name=search_icon.png" alt="search" height="35px" /></a>
+<form name="f">
+<input TYPE="text" STYLE="TEXT-ALIGN:center" NAME="key" size="100" height="50" ></input>
+</form>
+
+<script type="text/javascript">
+	var key = document.f.key.value;
+	document.write('<a href = "jam_list1?keyword='+ key + '"><img src="/image?name=search_icon.png" alt="search" height="35px"></img></a>');
+</script>
+
 
 <br></br><br></br><br></br>
 <a href="/emotion/anger"> <img src="/image?name=anger_icon.png" alt="anger" height = "35" /></a>
@@ -37,7 +44,7 @@
 	var rand_no = Math.floor(num*Math.random())+1;
 	document.write('<a href="jam_context?did='+ rand_no + '"><img src="/image?name=random_icon.png" alt="random" height = "35" /></a>');
 </script>
-</form>
+</div>
 
 
 <!-- <p>글 번호, 키워드1, 키워드2, 키워드3...</p> <p>/</p>-->

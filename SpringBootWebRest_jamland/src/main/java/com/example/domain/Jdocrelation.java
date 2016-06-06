@@ -22,7 +22,7 @@ public class Jdocrelation {
 	private Jkeyword jkeyword;
 	
 
-	private Jdocrelation()
+	public Jdocrelation()
 	{
 		
 	}

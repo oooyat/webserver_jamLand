@@ -8,6 +8,8 @@ import com.example.domain.Jdocrelation;
 
 public interface JdocrelationRepository extends CrudRepository<Jdocrelation, String>{
 	
+	Jdocrelation findByDidAndKeyword(int did, String keyword);
+	
 	List<Jdocrelation> findAll();
 	List<Jdocrelation> findByDid(int did);
 	List<Jdocrelation> findByKeyword(String keyword);

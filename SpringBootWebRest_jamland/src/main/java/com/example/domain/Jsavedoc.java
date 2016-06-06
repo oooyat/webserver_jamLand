@@ -26,7 +26,7 @@ public class Jsavedoc {
 	@ManyToOne
 	private Jdoc jdoc;
 		
-	private Jsavedoc()
+	public Jsavedoc()
 	{
 		
 	}

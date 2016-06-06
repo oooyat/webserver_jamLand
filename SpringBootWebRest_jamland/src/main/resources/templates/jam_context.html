@@ -40,20 +40,32 @@
 <br></br>
 <p name = "context2" rows="7" cols="90" wrap = "VIRTUAL"  th:text="${context2}"></p>
 <br></br>
-<a href="jam_main.html"><img src="/image?name=icon_FB.png" width="50" height="50" alt=""></img></a>
+<div
+  class="fb-like"
+  data-share="true"
+  data-width="450"
+  data-show-faces="true">
+</div>
+<br></br>
 <img src="/image?name=icon_twt.png" alt="" width="50" height="50" name="test1"></img>
 <img src="/image?name=icon_instr.png" width="50" height="50" alt=""></img>
 <br></br><br></br>
-<a><img src = "/image?name=save_icon.png"></img></a>
+
 
 </form>
 
 
 
 <script>
+
+	
+
 	 var did = document.getElementById("did").innerHTML;
 	 document.write('<a href="jam_plus?did='+ did + '"><img src="/image?name=mdfy_icon.png"></img></a>');
-
+	 document.write('<a href="save.do?did='+ did + '"><img src = "/image?name=save_icon.png"></img></a>');
+	//<a href="save.do?did="><img src = "/image?name=save_icon.png"></img></a>
+	 
+	 
       // 2. This code loads the  Player API code asynchronously.
       var ytb = document.getElementById("ytb").innerHTML;
       var tag = document.createElement('script');
@@ -96,4 +108,26 @@
       }
     </script>
 </body>
+
+<script>
+window.fbAsyncInit = function() {
+  FB.init({
+    appId      : '1325668044116064',
+    xfbml      : true,
+    version    : 'v2.6'
+  });
+};
+
+(function(d, s, id){
+   var js, fjs = d.getElementsByTagName(s)[0];
+   if (d.getElementById(id)) {return;}
+   js = d.createElement(s); js.id = id;
+   js.src = "//connect.facebook.net/en_US/sdk.js";
+   fjs.parentNode.insertBefore(js, fjs);
+ }(document, 'script', 'facebook-jssdk'));
+ 
+ 
+</script>
+
+
 </html>
