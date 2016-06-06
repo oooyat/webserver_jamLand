@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8"></meta>
+<title>jamland_menu</title>
+<style type="text/css">
+.when_title {
+}
+</style>
+<script>
+function whatTime()
+{
+	cdate = new Date();
+	cyear = cdate.getYear() + 1900;
+	cmonth = cdate.getMonth() +1;
+	ctoday = cdate.getDate();
+	
+	document.write(cyear + ". " + cmonth + ". " + ctoday + " ");
+}
+</script>
+</head>
+
+<body>
+<hr></hr>
+<p th:text="${num}" hidden="false" id="num"></p>
+<p th:text="${keywords}" hidden="false" id="keywords"></p>
+
+<font size="5"> <script>whatTime()</script> </font>
+<p >환영합니다. </p>
+<a HREF="jam_main.html" TARGET="intro"><img src="/image?name=JAMLAND_SUBTITLE2.png" alt="이미지가 없어요" width="262.40" height="182.40" /></a>
+    <br></br><br></br>
+    
+    <!-- 
+    <a href="jam_list1.html" TARGET="intro">음악대장</a>
+    <br></br>
+     -->   
+    <script>    
+    var i=0,keywords = document.getElementById("keywords").innerHTML;
+    var num =document.getElementById("num").innerHTML, keyword = keywords.split("%"); 
+		
+	    
+    //document.write('<a>dssdfdsffdssd</a>');
+     for(i=0; i!=num; i++)
+    {
+    	 	document.write('<a href = "jam_list1?keyword='+ keyword[i]  +'" TARGET="intro">' + keyword[i] + '</a><br></br>');       	 
+   			document.write('<br></br>');
+    }
+   
+     document.write('<a href = "jam_list1?keyword='+ keyword[i]  +'" TARGET="intro">' + keyword[i] + '</a><br></br>');
+      
+    </script>
+    
+    
+<br></br><br></br>
+<a href="jam_plus.html" TARGET="intro">+ JAM 쓰기</a>
+<br></br>
+<a href="jam_mine.html" TARGET="intro">+ 나의 동영상 보기</a>
+<form>
+	
+</form>
+ 
+</body>
+
+</html>

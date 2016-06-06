@@ -1,0 +1,55 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8"></meta>
+<title>jam_plus</title>
+<style type="text/css">
+.jam_page {
+}
+</style>
+</head>
+
+<body class="jam_plus_page">
+	<p th:text="${keywords}" hidden="false" id="keywords"></p>
+	<p th:text="${title}" hidden="false" id="title"></p>
+	<p th:text="${subtitle}" hidden="false" id="subtitle"></p>
+	<p th:text="${context1}" hidden="false" id="context1"></p>
+	<p th:text="${context2}" hidden="false" id="context2"></p>
+	
+	<p th:text="${ytb}" hidden="false" id="ytb"></p>
+	
+    <img src="/image?name=JAMLAND_TITLE_SMALL.png"></img>
+    
+    <form name="plus_form" action="/plus.do" method="post">
+    	<p>Title</p>    
+	    <input id="title_input" TYPE="text" STYLE="TEXT-ALIGN:LEFT" NAME="input_title" size="50" height="50" th:value="${title}"></input>    
+	
+	    <p>SubTitle</p>    
+	    <input id="subtitle_input" TYPE="text" STYLE="TEXT-ALIGN:LEFT" NAME="input_subtitle" size="50" height="50" th:value="${subtitle}" ></input>   
+	
+	    <p>YouTube id </p>    
+	    <input id="ytb_input" TYPE="text" STYLE="TEXT-ALIGN:LEFT" NAME="input_ytb" size="50" height="50" th:value="${ytb}" ></input>   
+	
+	    <br></br>
+	    <p >동영상에 대해 소개해 주세요. </p>   
+	    <textarea id="context1" name = "input_context1" rows="10" cols="50" wrap = "VIRTUAL" th:text="${context1}"></textarea>
+	
+	    <br></br>
+	    <p >동영상에 관련 정보를 적어주세요. </p>
+	    <textarea id="context2" name = "input_context2" rows="10" cols="50" wrap = "VIRTUAL" th:text="${context2}"></textarea>
+	    
+	    <p>키워드들(%로 나누어집니다.) </p>    
+	    <input id="keyword_input" TYPE="text" STYLE="TEXT-ALIGN:LEFT" NAME="input_keywords" size="50" height="50" th:value="${keywords}" ></input>     
+    
+    <br></br><br></br><br></br>
+    <input type="submit" value="작성하기"></input>
+    </form>
+    
+<!--  
+<a ><img src="/image?name=write_icon.png" alt="search" height = "35" ></img></a>
+ -->
+
+<script>
+</script>
+</body>
+</html>

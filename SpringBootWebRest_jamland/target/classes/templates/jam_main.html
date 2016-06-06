@@ -1,0 +1,55 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8"></meta>
+<title>jam_main</title>
+<style type="text/css">
+.jam_page {
+}
+</style>
+</head>
+
+<body class="jam_main_page" SRC= "back1">
+
+<p th:text="${num}" hidden="false" id="num"></p>
+
+<form ALIGN="CENTER">
+<a href="jam_login.html" >로그인 </a> 
+    <a href="jam_join.html">회원가입</a>
+<br></br>
+<br></br><br></br><br></br><br></br><br></br><br></br>
+<img src="/image?name=JAMLAND_TITLE.png" alt="title" ></img>
+<br></br>
+
+<input TYPE="text" STYLE="TEXT-ALIGN:center" NAME="input1" size="100" height="50"  ></input>
+<a><img src="/image?name=search_icon.png" alt="search" height="35px" /></a>
+
+<br></br><br></br><br></br>
+<a href="/emotion/anger"> <img src="/image?name=anger_icon.png" alt="anger" height = "35" /></a>
+<a href="/emotion/disgust"> <img src="/image?name=disgust_icon.png" alt="disgust" height = "35" /></a>
+<a href="/emotion/fear"> <img src="/image?name=fear_icon.png" alt="fear" height = "35" /></a>
+<a href="/emotion/joy"> <img src="/image?name=joy_icon.png" alt="joy" height = "35" /></a>
+<a href="/emotion/sadness"> <img src="/image?name=sadness_icon.png" alt="sadness" height = "35" /></a>
+
+<br></br><br></br>
+<script>
+	var num = document.getElementById("num").innerHTML;
+	var rand_no = Math.floor(num*Math.random())+1;
+	document.write('<a href="jam_context?did='+ rand_no + '"><img src="/image?name=random_icon.png" alt="random" height = "35" /></a>');
+</script>
+</form>
+
+
+<!-- <p>글 번호, 키워드1, 키워드2, 키워드3...</p> <p>/</p>-->
+
+
+
+
+
+     
+
+<script>
+
+</script>
+</body>
+</html>

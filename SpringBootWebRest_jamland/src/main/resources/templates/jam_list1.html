@@ -1,0 +1,135 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8"></meta>
+<title>jam_list1</title>
+<style type="text/css">
+.jam_page {
+}
+</style>
+</head>
+
+<body class="jam_list_page">
+    
+    <p th:text="${num}" hidden="false" id="num"></p>
+    <p th:text="${dids}" hidden="false" id="dids"></p>
+	<p th:text="${content_title}" hidden="false" id="content_title"></p>
+	<p th:text="${content_subtitle}" hidden="false" id="content_subtitle"></p>
+	<p th:text="${content_keywords}" hidden="false" id="content_keywords"></p>
+	<p th:text="${content_ytb}" hidden="false" id="content_ytb"></p>
+	
+	<h1 th:text="'keyword :' + ${keyword}"></h1>
+	
+	<input TYPE="text" STYLE="TEXT-ALIGN:center" NAME="input1" size="50" height="50"  ></input>
+	<a> <img src="/image?name=search_icon.png" alt="search" height = "35" ></img></a>    
+	<br></br><br></br>
+	<!-- 
+	<table width="200">
+	    <tr>
+	        <td width="100">
+	        <div id="player"></div>
+	        </td>
+	        <td width="20"></td>
+	        <td width="100">
+	        <a href="jam_context.html"><font size="5">Title</font></a>
+	        <p><font size="3">subTitle</font></p>
+	        <p><font size="2">keywords</font></p>    
+	        </td>
+	        
+	    </tr>
+	</table>	
+	 -->
+	 <hr></hr>	
+	<script>
+	
+	var i=0, num = document.getElementById("num").innerHTML;
+	var dids =  document.getElementById("dids").innerHTML;
+	var did = dids.split("%");
+	
+	var content_title =  document.getElementById("content_title").innerHTML;
+	var title = content_title.split("%");
+	
+	var content_subtitle =  document.getElementById("content_subtitle").innerHTML;
+	var subtitle = content_subtitle.split("%");
+	var content_keywords = document.getElementById("content_keywords").innerHTML;
+	var keywords = content_keywords.split("%");
+	
+	//document.write('<a>'+ 'dsfdsf'+ i+'</a><br></br>');
+	for(i=0; i!=num ; i++)
+    {		
+		//
+		document.write('<table width="1000"><tr>');
+		
+		document.write('<td width="100">');		
+        document.write('<div id="player' + i + '"></div>');       
+        document.write("</td>");   
+        
+        document.write('<td width="900">');
+        document.write('<a href="/jam_context?did='+ did[i] +'"><font size="5">'+ title[i] +'</font></a>');
+        document.write('<p><font size="3">'+ subtitle[i] +'</font></p>');
+        document.write('<p><font size="2">'+ keywords[i] +'</font></p>');
+        document.write("</td>"); 
+        
+        document.write("</tr></table>");
+        document.write("<hr></hr>");
+    }
+	
+	</script>
+	    
+	<br></br>
+	    <form>
+	   
+	    </form>
+	<br></br>
+
+
+<script>	  
+	      var tag = document.createElement('script');
+	
+	      tag.src = "https://www.youtube.com/iframe_api/";
+	      var firstScriptTag = document.getElementsByTagName('script')[0];
+	      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+	
+	      var player;
+	      var i=0, num = document.getElementById("num").innerHTML;
+		  var content_ytb = document.getElementById("content_ytb").innerHTML;
+		  var ytb = content_ytb.split("%");
+		  
+		  //document.write('<p>'+ ytb[0] +'</p>');
+		  
+	      function onYouTubeIframeAPIReady() 
+	      {
+	    	
+	    	for(i=0; i!=num; i++)
+	    	{	    		
+	    		  player = new YT.Player('player' + i, {
+	    	          height: '156',
+	    	          width: '256',
+	    	          videoId: ytb[i] ,
+	    	          events: {
+	    	            'onStateChange': onPlayerStateChange
+	    	          }
+	    	        });   
+	    	}     
+	      }
+	
+	      // 4. The API will call this function when the video player is ready.
+	      function onPlayerReady(event) {
+	        event.target.playVideo();
+	      }
+	
+	      var done = false;
+	      function onPlayerStateChange(event) {
+	        if (event.data == YT.PlayerState.PLAYING) {
+	          done = true;
+	        }
+	      }
+	      function stopVideo() {
+	        player.stopVideo();
+	      }
+	      
+	      
+	      
+	</script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8"></meta>
+<title>jam_login</title>
+<style type="text/css">
+.jam_page {
+}
+</style>
+</head>
+
+<body class="jam_login_page">
+
+<img src="/image?name=JAMLAND_TITLE_SMALL.png"></img>
+<br></br>
+    <form name="login_form" action="/login.do" method="post">
+    <p>ID</p>    
+    <input id="id_input" TYPE="text" STYLE="TEXT-ALIGN:LEFT" NAME="input1" size="20" height="50"  ></input>
+    <p>Password</p>    
+    <input id="password_input" TYPE="text" STYLE="TEXT-ALIGN:LEFT" NAME="input2" size="20" height="50"  ></input>
+   <br></br><br></br><br></br>   
+    <input type="submit" value="로그인"></input>
+    </form>
+
+<!-- 
+
+<a onClick="dologin();"><img src="/image?name=login2_icon.png"></img></a>
+ -->
+
+
+
+<script>
+	functuon dologin()
+	{
+		document.login_form.submit();		
+	}
+</script>
+</body>
+</html>
