@@ -357,7 +357,7 @@ public class JAMLANDController {
     		jkeyword.setKo(ko);
     		
     		String en = naver.koToEn(ko);
-    		System.out.println(en);
+    		//System.out.println(en);
     		jkeyword.setEn(en);
     		
     		watson = new WatsonConnection(en);

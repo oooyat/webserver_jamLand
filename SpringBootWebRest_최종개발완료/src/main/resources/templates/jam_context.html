@@ -2,11 +2,15 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="utf-8"></meta>
+<meta property="og:title" content="${title}"></meta>
+<meta property="og:url" content="http://localhost:8080"></meta>
+<meta property="og:description" content="마음에 드는 동영상에 키워드를 붙여 보세요!"></meta>
 <title>jam_context</title>
 <style type="text/css">
 .jam_page {
 }
 </style>
+<script src = "https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 </head>
 
 <body class="jam_page">
@@ -22,7 +26,7 @@
 
 
 <p th:text="'No.' + ${did} + ${keywords}"></p>
-<h1 th:text="${title}"></h1>
+<h1 th:text="${title}"></h1> 
 <h3 th:text="${subtitle}"></h3>
 <form align = "center"><a><img alt="" src="/image?name=byeol_icon.png"></img></a></form>
  
@@ -40,28 +44,25 @@
 <br></br>
 <p name = "context2" rows="7" cols="90" wrap = "VIRTUAL"  th:text="${context2}"></p>
 <br></br>
-<div
-  class="fb-like"
-  data-share="true"
-  data-width="450"
-  data-show-faces="true">
-</div>
+
 <br></br>
-<img src="/image?name=icon_twt.png" alt="" width="50" height="50" name="test1"></img>
-<img src="/image?name=icon_instr.png" width="50" height="50" alt=""></img>
+<a id="fb"><img src="/image?name=icon_FB.png" alt="" width="50" height="50" name="twt"></img></a>
+<a id="btn"><img src="/image?name=icon_twt.png" alt="" width="50" height="50" name="twt"></img></a>
+
 <br></br><br></br>
 
-
+	
 </form>
 
 
 
 <script>
-
+//<img src="/image?name=icon_instr.png" width="50" height="50" alt=""></img>
 	
 
 	 var did = document.getElementById("did").innerHTML;
 	 document.write('<a href="jam_plus?did='+ did + '"><img src="/image?name=mdfy_icon.png"></img></a>');
+	 document.write('    ');
 	 document.write('<a href="save.do?did='+ did + '"><img src = "/image?name=save_icon.png"></img></a>');
 	//<a href="save.do?did="><img src = "/image?name=save_icon.png"></img></a>
 	 
@@ -120,13 +121,48 @@ window.fbAsyncInit = function() {
 
 (function(d, s, id){
    var js, fjs = d.getElementsByTagName(s)[0];
-   if (d.getElementById(id)) {return;}
+   if (d.getElementById(id)) {
+	   
+	   return;}
    js = d.createElement(s); js.id = id;
    js.src = "//connect.facebook.net/en_US/sdk.js";
    fjs.parentNode.insertBefore(js, fjs);
+   
  }(document, 'script', 'facebook-jssdk'));
  
+ $('#fb').bind('click', function(){
+	 FB.ui({
+		  method: 'share',
+		  href: 'https://www.youtube.com/watch?v='+ document.getElementById("ytb").innerHTML ,//
+		}, function(response){}); 
+ });
  
+ 
+ /********************************/
+ 
+ var twitterText =  document.getElementById("title").innerHTML + " : " +
+ 							document.getElementById("subtitle").innerHTML;
+ 
+ var thisPageUrl1 = "http://localhost:8080";
+
+ $('#btn').bind('click', function()
+ {
+	 twitterWrite(twitterText, thisPageUrl1);
+ });
+ 
+// document.write('<p>aaaaa</p>');
+function twitterWrite( title, pageUrl)
+{
+	var encodingTitle = encodeURI(title);
+	var encodingPageUrl = encodeURI(pageUrl);
+	
+	 var url = "http://twitter.com/share?" + "text=" + encodingTitle + 
+     "&url;=" + encodingPageUrl;	
+	window.open(url);
+}
+/*********************************/
+
+
 </script>
 
 
